@@ -110,7 +110,23 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        if ($request->image != null) {
+            $data['image'] = $request->file('image')->store('image_product');
+        }
+        // return $request->all();
+        $update = Product::where('id', $id)->update($data);
+        if ($update) {
+            return response([
+                'status' => 200,
+                'message' => 'data berhasil diubah',
+            ], 200);
+        }else{
+            return response([
+                'status' => 400,
+                'message' => 'data gagal diubah',
+            ], 400);
+        }
     }
 
     /**
@@ -121,6 +137,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }
