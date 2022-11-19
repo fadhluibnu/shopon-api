@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
+        $product = Product::with('user')->get();
         return response([
             'status' => 200,
             'data' => $product
@@ -62,7 +62,6 @@ class ProductController extends Controller
         }
         $validator = $validate->validate();
         $validator['image'] = $request->file('image')->store('image_product');
-        // ->store('public');
         $product = Product::create($validator);
         if ($product) {
             return response([
@@ -114,7 +113,6 @@ class ProductController extends Controller
         if ($request->image != null) {
             $data['image'] = $request->file('image')->store('image_product');
         }
-        // return $request->all();
         $update = Product::where('id', $id)->update($data);
         if ($update) {
             return response([
@@ -137,6 +135,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        
+        $delete = Product::destroy($id);
+        if($delete){
+            return response([
+                'status' => 200,
+                'message' => 'data berhasil dihapus',
+            ], 200);
+        }else{
+            return response([
+                'status' => 400,
+                'message' => 'data berhasil diubah',
+            ], 400);
+        }
     }
 }

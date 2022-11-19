@@ -24,10 +24,6 @@ class User extends Authenticatable
         'role'
     ];
 
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -38,7 +34,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    
+    // protected $with = [
+    //     'products'
+    // ];
+    
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     /**
      * The attributes that should be cast.
      *
