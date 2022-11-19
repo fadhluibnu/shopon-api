@@ -71,7 +71,7 @@ class ProductController extends Controller
             ]);
         }else {
             return response([
-                'status' => 200,
+                'status' => 400,
                 'message' => "data gagal ditambahkan",
                 'data' => null
             ]);
