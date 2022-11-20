@@ -18,4 +18,8 @@ class Product extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function keranjangs()
+    {
+        return $this->hasMany(User::class, 'id_produk');
+    }
 }

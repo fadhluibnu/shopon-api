@@ -35,13 +35,13 @@ class User extends Authenticatable
         'remember_token',
     ];
     
-    // protected $with = [
-    //     'products'
-    // ];
-    
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'user_id');
+    }
+    public function keranjangs()
+    {
+        return $this->hasMany(Keranjang::class, 'id_user');
     }
     /**
      * The attributes that should be cast.
