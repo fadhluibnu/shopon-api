@@ -43,6 +43,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Keranjang::class, 'id_user');
     }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
     /**
      * The attributes that should be cast.
      *

@@ -9,4 +9,23 @@ class Order extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    // protected $with = [
+    //     'product',
+    //     'user',
+    //     'diskon'
+    // ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'id_product');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+    public function diskon()
+    {
+        return $this->belongsTo(Diskon::class, 'diskon_id');
+    }
 }

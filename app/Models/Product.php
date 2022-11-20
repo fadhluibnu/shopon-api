@@ -20,6 +20,10 @@ class Product extends Model
     }
     public function keranjangs()
     {
-        return $this->hasMany(User::class, 'id_produk');
+        return $this->hasMany(Keranjang::class, 'id_produk');
+    }
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

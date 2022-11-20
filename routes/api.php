@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\KeranjangController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('/diskon', [DiskonController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::resource('/order', OrderController::class);
 
     Route::middleware('admin')->group(function () {
         // product route
@@ -41,7 +43,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // keranjang route
         Route::resource('/keranjang', KeranjangController::class)->except('index')->middleware('admin');
 
-        // keranjang diskon
+        // diskon diskon
         Route::resource('/diskon', DiskonController::class)->except('index')->middleware('admin');
     });
 
