@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DiskonController;
 use App\Http\Controllers\KeranjangController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // get produk
 Route::get('/product', [ProductController::class, 'index']);
 Route::get('/keranjang', [KeranjangController::class, 'index']);
+Route::get('/diskon', [DiskonController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -38,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // keranjang route
         Route::resource('/keranjang', KeranjangController::class)->except('index')->middleware('admin');
+
+        // keranjang diskon
+        Route::resource('/diskon', DiskonController::class)->except('index')->middleware('admin');
     });
 
     Route::get('/check', function () {
